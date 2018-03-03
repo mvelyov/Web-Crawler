@@ -1,0 +1,23 @@
+{
+  "name": "Crawler",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+   "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mvelyov/Web-Crawler.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mvelyov/Web-Crawler/issues"
+  },
+  "homepage": "https://github.com/mvelyov/Web-Crawler#readme",
+  "dependencies": {
+    "eslint": "^4.18.2",
+    "jquery": "^3.3.1",
+    "jsdom": "^11.6.2",
+    "lodash": "^4.17.5"
+  }
+}
