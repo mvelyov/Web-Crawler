@@ -16,16 +16,20 @@ const {
 
 const run = async () => {
     const pcworldUrls = await getFullLaptopUrlFromPcworld();
-    pcworldUrls.forEach(async (url) => {
-        const laptop = await getLaptopInfoFromPcworld(url);
-        console.log(laptop);
-    });
+    const laptopsFromPcworld =
+    await Promise.all(pcworldUrls.map(async (item) => {
+        const laptop = await getLaptopInfoFromPcworld(item);
+        return laptop;
+    }));
 
     const argosUrls = await getFullLaptopUrlFromArgos();
-    argosUrls.forEach(async (url) => {
-        const laptop = await getLaptopInfoFromArgos(url);
-        console.log(laptop);
-    });
+    const laptopsFromArgos = await Promise.all(argosUrls.map(async (item) => {
+        const laptop = await getLaptopInfoFromArgos(item);
+        return laptop;
+    }));
+
+    const allLaptops = [...laptopsFromPcworld, ...laptopsFromArgos];
+    console.log(allLaptops);
 };
 
 run();
