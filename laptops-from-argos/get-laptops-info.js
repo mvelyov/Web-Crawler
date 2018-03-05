@@ -83,7 +83,8 @@ const getLaptopInfoFromArgos = async (url) => {
             os = item4.split(' ');
             os = `${os[1]} ${os[2]}`.slice(0, -1);
         }
-        return [brand, price, fullName, os, ram, storage, processor];
+        const website = 'http://www.argos.co.uk/';
+        return [brand, price, fullName, os, ram, storage, processor, website];
     };
     return addLaptop();
 };

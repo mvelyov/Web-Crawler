@@ -48,10 +48,10 @@ const getLaptopInfoFromPcworld = async (url) => {
         if (brand === 'APPLE' ||
             brand === 'GOOGLE' ||
             fullName === 'ASUS Flip C302 2 in 1 Chromebook - Silver' ||
-            fullName=== 'HP Pavilion 15-bc250na 15.6" Gaming Laptop - Silver' ||
+            fullName === 'HP Pavilion 15-bc250na 15.6" Gaming Laptop - Silver' ||
             fullName === 'HP ENVY x360 15.6" 2 in 1 - Ash Silver') {
             let os = data.getLaptopParametres()[0];
-            const processor = data.getLaptopParametres()[1];
+            let processor = data.getLaptopParametres()[1];
             const parametres = data.getLaptopParametres()[2];
 
             if (os.includes('Windows 10')) {
@@ -64,15 +64,25 @@ const getLaptopInfoFromPcworld = async (url) => {
                 os = 'Windows 10';
             }
             let [ram, storage] = parametres.split(' / ');
-            ram = ram.split(' ');
-            ram = `${ram[1]}${ram[2]}`;
-            storage = storage.split(': ')[1].split(' ');
-            storage = `${storage[0]}${storage[1]} ${storage[2]}`;
-            return [brand, price, fullName, os, ram, storage, processor];
+            if (ram.includes('OneDrive')) {
+                ram = '4GB';
+                processor = 'Intel® Pentium® N3710 Processor';
+            } else {
+                ram = ram.split(' ');
+                ram = `${ram[1]}${ram[2]}`;
+            }
+            if (typeof storage === 'undefined') {
+                storage = '32 GB eMMC';
+            } else {
+                storage = storage.split(': ')[1].split(' ');
+                storage = `${storage[0]}${storage[1]} ${storage[2]}`;
+            }
+            const website = 'https://www.pcworld.co.uk/';
+            return [brand, price, fullName, os, ram, storage, processor, website];
         }
         let os = data.getLaptopParametres()[1];
-            const processor = data.getLaptopParametres()[2];
-            const parametres = data.getLaptopParametres()[3];
+        let processor = data.getLaptopParametres()[2];
+        const parametres = data.getLaptopParametres()[3];
         if (os.includes('Windows 10')) {
             os = os.split(' ');
             os = `${os[0]} ${os[1]}`;
@@ -84,15 +94,21 @@ const getLaptopInfoFromPcworld = async (url) => {
         }
 
         let [ram, storage] = parametres.split(' / ');
-        ram = ram.split(' ');
-        ram = `${ram[1]}${ram[2]}`;
-        if (typeof storage === 'undefined') {
-            storage = '1TB HDD';
+        if (ram.includes('OneDrive')) {
+            ram = '4GB';
+            processor = 'Intel® Pentium® N3710 Processor';
         } else {
-        storage = storage.split(': ')[1].split(' ');
-        storage = `${storage[0]}${storage[1]} ${storage[2]}`;
+            ram = ram.split(' ');
+            ram = `${ram[1]}${ram[2]}`;
         }
-        return [brand, price, fullName, os, ram, storage, processor];
+        if (typeof storage === 'undefined') {
+            storage = '32 GB eMMC';
+        } else {
+            storage = storage.split(': ')[1].split(' ');
+            storage = `${storage[0]}${storage[1]} ${storage[2]}`;
+        }
+        const website = 'https://www.pcworld.co.uk/';
+        return [brand, price, fullName, os, ram, storage, processor, website];
     };
     return addLaptop();
 };
