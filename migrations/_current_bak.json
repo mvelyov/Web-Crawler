@@ -39,7 +39,7 @@
                 },
                 "price": {
                     "allowNull": false,
-                    "seqType": "Sequelize.STRING"
+                    "seqType": "Sequelize.INTEGER"
                 },
                 "ram": {
                     "allowNull": false,
@@ -60,12 +60,42 @@
                 "updatedAt": {
                     "allowNull": false,
                     "seqType": "Sequelize.DATE"
+                },
+                "brandId": {
+                    "allowNull": false,
+                    "references": {
+                        "model": "brands",
+                        "key": "id"
+                    },
+                    "onDelete": "CASCADE",
+                    "onUpdate": "CASCADE",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "oId": {
+                    "allowNull": false,
+                    "references": {
+                        "model": "os",
+                        "key": "id"
+                    },
+                    "onDelete": "CASCADE",
+                    "onUpdate": "CASCADE",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "websiteId": {
+                    "allowNull": false,
+                    "references": {
+                        "model": "websites",
+                        "key": "id"
+                    },
+                    "onDelete": "CASCADE",
+                    "onUpdate": "CASCADE",
+                    "seqType": "Sequelize.INTEGER"
                 }
             },
             "indexes": []
         },
-        "operating-systems": {
-            "tableName": "operating-systems",
+        "os": {
+            "tableName": "os",
             "schema": {
                 "id": {
                     "allowNull": false,
@@ -113,5 +143,5 @@
             "indexes": []
         }
     },
-    "revision": 1
+    "revision": 3
 }

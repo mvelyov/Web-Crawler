@@ -39,11 +39,11 @@
                 },
                 "price": {
                     "allowNull": false,
-                    "seqType": "Sequelize.STRING"
+                    "seqType": "Sequelize.INTEGER"
                 },
                 "ram": {
                     "allowNull": false,
-                    "seqType": "Sequelize.STRING"
+                    "seqType": "Sequelize.INTEGER"
                 },
                 "storage": {
                     "allowNull": false,
@@ -143,5 +143,5 @@
             "indexes": []
         }
     },
-    "revision": 2
+    "revision": 4
 }
