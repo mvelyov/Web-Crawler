@@ -9,18 +9,23 @@ const db = require('../models');
 const {
     laptop,
 } = db;
-let table;
-const values = [];
+
 const run = async () => {
     await sequelize.sync();
-    const laptops = (await laptop.findAll({
+
+    const findProcessorCondition = {
         where: {
-            processor: {
-                like: '%AMD%',
-            },
+            processor: {},
         },
-    }));
-    laptops.forEach((item) => {
+    };
+
+    const args = process.argv[2];
+    const [condition, parameter] = args.split('-');
+    findProcessorCondition.where.processor[condition] = `%${parameter}%`;
+
+    let table;
+    const values = [];
+    (await laptop.findAll(findProcessorCondition)).map((item) => {
         table = [item.dataValues.fullName,
             `£${item.dataValues.price}.00`,
             `${item.dataValues.ram} GB`,

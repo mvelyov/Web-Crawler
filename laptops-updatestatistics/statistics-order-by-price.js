@@ -9,16 +9,28 @@ const db = require('../models');
 const {
     laptop,
 } = db;
-let table;
-const values = [];
+
+
 const run = async () => {
     await sequelize.sync();
-    const laptops = (await laptop.findAll({ order: ['price'] }));
-    laptops.forEach((item) => {
-            table = [item.dataValues.fullName, `£${item.dataValues.price}.00`];
-            values.push(table);
-        });
-console.table(['name', 'price'], values);
+
+    let table;
+    const values = [];
+
+    const findOrder = {
+        order: [],
+    };
+
+    const args = process.argv[2];
+    findOrder.order.push(args);
+    (await laptop.findAll(findOrder)).map((item) => {
+        table = [item.dataValues.fullName,
+            `£${item.dataValues.price}.00`,
+            `${item.dataValues.storage}`,
+        ];
+        values.push(table);
+    });
+    console.table(['name', 'price', 'storage'], values);
 };
 
 run();
