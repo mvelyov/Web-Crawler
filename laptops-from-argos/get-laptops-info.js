@@ -3,7 +3,6 @@ const {
 } = require('jsdom');
 
 const $init = require('jquery');
-const _ = require('lodash');
 
 const getLaptopInfoFromArgos = async (url) => {
     const addData = async () => {
@@ -26,7 +25,7 @@ const getLaptopInfoFromArgos = async (url) => {
 
 
         const getLaptopParametres = () => {
-            let pageLinksSelector = '.product-description-content-text li:lt(6)';
+        let pageLinksSelector = '.product-description-content-text li:lt(6)';
             pageLinksSelector = [...$(pageLinksSelector)];
             return pageLinksSelector.map((link) => $(link))
                 .map(($link) => $link.text());
@@ -53,12 +52,13 @@ const getLaptopInfoFromArgos = async (url) => {
         let fullName = data.getLaptopName()[0].split(' ');
         fullName[0] = brand;
         fullName = fullName.join(' ');
-        const price = `£${data.getLaptopPrice()[0]}`;
-        const item1 = data.getLaptopParametres()[0];        
+        const getPrice = `${data.getLaptopPrice()[0]}`;
+        const price = parseFloat(getPrice.replace( /[^\d\.]*/g, ''));
+        const item1 = data.getLaptopParametres()[0];
         const processor = item1;
         let item2 = data.getLaptopParametres()[2];
         item2 = item2.split(' ')[0];
-        const ram = item2;
+        let ram = item2;
         const item3 = data.getLaptopParametres()[3];
         const item4 = data.getLaptopParametres()[4];
         const item5 = data.getLaptopParametres()[5];
@@ -84,6 +84,11 @@ const getLaptopInfoFromArgos = async (url) => {
             os = `${os[1]} ${os[2]}`.slice(0, -1);
         }
         const website = 'http://www.argos.co.uk/';
+        if (ram.includes('1TB')) {
+            ram = '8GB';
+            storage = '1TB HDD';
+        }
+        ram = parseFloat(ram.replace( /[^\d\.]*/g, ''));
         return [brand, price, fullName, os, ram, storage, processor, website];
     };
     return addLaptop();

@@ -28,8 +28,6 @@ const getAllLaptops = async () => {
         return laptop;
     }));
 
-    // const allLaptops = laptopsFromPcworld;
-
     const allLaptops = [...laptopsFromPcworld, ...laptopsFromArgos];
     return allLaptops;
 };

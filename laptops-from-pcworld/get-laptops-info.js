@@ -42,14 +42,14 @@ const getLaptopInfoFromPcworld = async (url) => {
         const data = await addData();
         const name = data.getLaptopName();
         const [brand, fullName] = [name[0], name.join(' ')];
-        let price = data.getLaptopPrice();
-        price = price[0];
+        const getPrice = data.getLaptopPrice()[0];
+        const price = parseFloat(getPrice.replace( /[^\d\.]*/g, ''));
 
         if (brand === 'APPLE' ||
-            brand === 'GOOGLE' ||
-            fullName === 'ASUS Flip C302 2 in 1 Chromebook - Silver' ||
-            fullName === 'HP Pavilion 15-bc250na 15.6" Gaming Laptop - Silver' ||
-            fullName === 'HP ENVY x360 15.6" 2 in 1 - Ash Silver') {
+        brand === 'GOOGLE' ||
+        fullName === 'ASUS Flip C302 2 in 1 Chromebook - Silver' ||
+        fullName === 'HP Pavilion 15-bc250na 15.6" Gaming Laptop - Silver' ||
+        fullName === 'HP ENVY x360 15.6" 2 in 1 - Ash Silver') {
             let os = data.getLaptopParametres()[0];
             let processor = data.getLaptopParametres()[1];
             const parametres = data.getLaptopParametres()[2];
@@ -78,7 +78,8 @@ const getLaptopInfoFromPcworld = async (url) => {
                 storage = `${storage[0]}${storage[1]} ${storage[2]}`;
             }
             const website = 'https://www.pcworld.co.uk/';
-            return [brand, price, fullName, os, ram, storage, processor, website];
+            ram = parseFloat(ram.replace( /[^\d\.]*/g, ''));
+        return [brand, price, fullName, os, ram, storage, processor, website];
         }
         let os = data.getLaptopParametres()[1];
         let processor = data.getLaptopParametres()[2];
@@ -108,6 +109,7 @@ const getLaptopInfoFromPcworld = async (url) => {
             storage = `${storage[0]}${storage[1]} ${storage[2]}`;
         }
         const website = 'https://www.pcworld.co.uk/';
+        ram = parseFloat(ram.replace( /[^\d\.]*/g, ''));
         return [brand, price, fullName, os, ram, storage, processor, website];
     };
     return addLaptop();

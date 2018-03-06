@@ -9,7 +9,6 @@ const {
 
 const updateDatabase = async () => {
     const laptops = await getAllLaptops();
-    // console.log(laptops);
 
     laptops.map(async (laptop) => {
         const brand = laptop[0];
@@ -25,16 +24,19 @@ const updateDatabase = async () => {
         FROM brands
         WHERE name='${brand}'`;
 
-        let id = (await sql.execute(getBrandId)).map((row) => row.id);
-
-if (typeof id[0] === 'undefined') {
-    const insertBrandName = `
-         INSERT IGNORE INTO brands (name)
-         VALUES ('${brand}')`;
-        sql.execute(insertBrandName);
-} 
-    id = (await sql.execute(getBrandId)).map((row) => row.id);
-    const brandId = id[0];
+        let id = (await sql.execute(getBrandId)).map((row) => (row.id));
+        let brandId;
+        if (id.length === 0) {
+            const insertBrandName = `
+                 INSERT IGNORE INTO brands (name)
+                 VALUES ('${brand}')`;
+            sql.execute(insertBrandName);
+            id = (await sql.execute(getBrandId)).map((row) => row.id);
+            brandId = id[0];
+        } else {
+            id = (await sql.execute(getBrandId)).map((row) => row.id);
+            brandId = id[0];
+        }
 
 
         const osFullNames = `
@@ -63,14 +65,12 @@ if (typeof id[0] === 'undefined') {
 
         await sql.execute(insertAllColumns);
     });
+    return 'Database updated!';
 };
 
-// updateDatabase();
-
 const run = async () => {
-    await updateDatabase();
-    console.log('Database updated!');
+    const result = await updateDatabase();
+    console.log(result);
 };
 
 run();
-
