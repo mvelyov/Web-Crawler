@@ -7,9 +7,8 @@ const {
 const $init = require('jquery');
 const _ = require('lodash');
 
-const argosUrl = 'http://www.argos.co.uk/browse/technology/laptops-and-pcs/laptops-and-netbooks/c:30049/type:laptops/opt/page:3/';
-
 const getPaginationUrls = async () => {
+    const argosUrl = 'http://www.argos.co.uk/browse/technology/laptops-and-pcs/laptops-and-netbooks/c:30049/type:laptops/opt/page:3/';
     const dom = await JSDOM.fromURL(argosUrl);
     const $ = $init(dom.window);
     let pageLinksSelector = '.pagination__li a';

@@ -81,14 +81,14 @@ const getLaptopInfoFromPcworld = async (url) => {
             ram = parseFloat(ram.replace( /[^\d\.]*/g, ''));
         return [brand, price, fullName, os, ram, storage, processor, website];
         }
+
         let os = data.getLaptopParametres()[1];
         let processor = data.getLaptopParametres()[2];
         const parametres = data.getLaptopParametres()[3];
         if (os.includes('Windows 10')) {
             os = os.split(' ');
             os = `${os[0]} ${os[1]}`;
-        }
-        if (os.includes('MacOS') || os.includes('Chrome OS')) {
+        } else if (os.includes('MacOS') || os.includes('Chrome OS')) {
             os = os;
         } else {
             os = 'Windows 10';

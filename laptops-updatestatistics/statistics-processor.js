@@ -1,14 +1,7 @@
-require('console.table');
-
-const config = require('./db-config');
-
-const Sequelize = require('sequelize');
-const sequelize = new Sequelize(config);
-
-const db = require('../models');
 const {
+    sequelize,
     laptop,
-} = db;
+} = require('./config.js');
 
 const run = async () => {
     await sequelize.sync();
@@ -28,12 +21,11 @@ const run = async () => {
     (await laptop.findAll(findProcessorCondition)).map((item) => {
         table = [item.dataValues.fullName,
             `£${item.dataValues.price}.00`,
-            `${item.dataValues.ram} GB`,
             `${item.dataValues.processor}`,
         ];
         values.push(table);
     });
-    console.table(['name', 'price', 'ram', 'processor'], values);
+    console.table(['name', 'price', 'processor'], values);
 };
 
 run();

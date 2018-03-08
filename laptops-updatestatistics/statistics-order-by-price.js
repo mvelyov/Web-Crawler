@@ -1,14 +1,7 @@
-require('console.table');
-
-const config = require('./db-config');
-
-const Sequelize = require('sequelize');
-const sequelize = new Sequelize(config);
-
-const db = require('../models');
 const {
+    sequelize,
     laptop,
-} = db;
+} = require('./config.js');
 
 
 const run = async () => {
@@ -26,11 +19,10 @@ const run = async () => {
     (await laptop.findAll(findOrder)).map((item) => {
         table = [item.dataValues.fullName,
             `£${item.dataValues.price}.00`,
-            `${item.dataValues.storage}`,
         ];
         values.push(table);
     });
-    console.table(['name', 'price', 'storage'], values);
+    console.table(['name', 'price'], values);
 };
 
 run();

@@ -4,7 +4,7 @@ let connection = null;
 const setup = (configuration) => {
     connection = mysql.createConnection(configuration);
     connection.connect();
-}
+};
 
 const execute = (queryString) => {
     return new Promise((resolve, reject) => {
