@@ -1,12 +1,13 @@
+/* globals process */
+
+require('console.table');
+const db = require('../models');
 const {
-    sequelize,
-    laptop,
-} = require('./config.js');
+        laptop,
+    } = db;
 
 
 const run = async () => {
-    await sequelize.sync();
-
     let table;
     const values = [];
 

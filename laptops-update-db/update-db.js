@@ -9,7 +9,6 @@ const {
 
 const updateDatabase = async () => {
     const laptops = await getAllLaptops();
-
     laptops.map(async (laptop) => {
         const brand = laptop[0];
         const price = laptop[1];

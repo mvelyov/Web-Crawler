@@ -63,6 +63,7 @@ const getLaptopInfoFromArgos = async (url) => {
         let item2 = data.getLaptopParametres()[2];
         item2 = item2.split(' ')[0];
         let ram = item2;
+        let storage;
         if (ram.includes('1TB')) {
             ram = '8GB';
             storage = '1TB HDD';
@@ -73,7 +74,6 @@ const getLaptopInfoFromArgos = async (url) => {
         const item4 = data.getLaptopParametres()[4];
         const item5 = data.getLaptopParametres()[5];
 
-        let storage;
         if (item3.includes('and') && item3.startsWith(' and')) {
             storage = item3.split(' ');
             storage = `${storage[2]} ${storage[3]}`;

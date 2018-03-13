@@ -1,11 +1,12 @@
+/* globals process */
+
+require('console.table');
+const db = require('../models');
 const {
-    sequelize,
-    laptop,
-} = require('./config.js');
+        laptop,
+    } = db;
 
 const run = async () => {
-    await sequelize.sync();
-
     const findRamCondition = {
         'where': {
             'ram': {},

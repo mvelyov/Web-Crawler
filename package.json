@@ -30,17 +30,17 @@
     "sequelize-cli": "^4.0.0"
   },
   "bin": {
-    "update": "C:/Users/ACER/Desktop/Crawler/laptops-updatedb/update-db.js",
-    "statistics-order-by": "C:/Users/ACER/Desktop/Crawler/laptops-updatestatistics/statistics-order-by-price.js",
-    "statistics-processor": "C:/Users/ACER/Desktop/Crawler/laptops-updatestatistics/statistics-processor.js",
-    "statistics-filter-ram": "C:/Users/ACER/Desktop/Crawler/laptops-updatestatistics/statistics-ram.js"
+    "update": "C:/Users/ACER/Desktop/Crawler/laptops-update-db/update-db.js",
+    "statistics-order-by": "C:/Users/ACER/Desktop/Crawler/laptops-update-statistics/statistics-order-by-price.js",
+    "statistics-processor": "C:/Users/ACER/Desktop/Crawler/laptops-update-statistics/statistics-processor.js",
+    "statistics-filter-ram": "C:/Users/ACER/Desktop/Crawler/laptops-update-statistics/statistics-ram.js"
   },
   "scripts": {
     "add-migration": "node ./node_modules/sequelize-auto-migrations/bin/makemigration.js --name",
     "migrate": "node_modules/.bin/sequelize db:migrate",
-    "update": "node C:/Users/ACER/Desktop/Crawler/laptops-updatedb/update-db.js",
-    "statistics-order-by": "node C:/Users/ACER/Desktop/Crawler/laptops-updatestatistics/statistics-order-by-price.js",
-    "statistics-processor": "node C:/Users/ACER/Desktop/Crawler/laptops-updatestatistics/statistics-processor.js",
-    "statistics-filter-ram": "node C:/Users/ACER/Desktop/Crawler/laptops-updatestatistics/statistics-ram.js"
+    "update": "node C:/Users/ACER/Desktop/Crawler/laptops-update-db/update-db.js",
+    "statistics-order-by": "node C:/Users/ACER/Desktop/Crawler/laptops-update-statistics/statistics-order-by-price.js",
+    "statistics-processor": "node C:/Users/ACER/Desktop/Crawler/laptops-update-statistics/statistics-processor.js",
+    "statistics-filter-ram": "node C:/Users/ACER/Desktop/Crawler/laptops-update-statistics/statistics-ram.js"
   }
 }
