@@ -32,6 +32,8 @@ npm run statistics search:4g
 npm run statistics search:gorilla
 
 
+
+
 Technical Requirements --->
 
 •	No UI required, only CLI interface
